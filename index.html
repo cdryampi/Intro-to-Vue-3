@@ -11,18 +11,76 @@
   <body>
     <div id="app">
       <div class="nav-bar"></div>
-      
+
       <div class="product-display">
-        <div class="product-container">
+        <!-- start for -->
+        <div
+          v-for="product in products"
+          :key="product.id"
+          class="product-container"
+        >
           <div class="product-image">
-            <img v-bind:src="image">
+            <img v-bind:src="product.getImage()" />
           </div>
           <div class="product-info">
-            <h1>{{ product }}</h1>
-            <p v-if="inStock">In Stock</p>
+            <h1>{{ product.name }}</h1>
+            <p v-if="product.inStock">In Stock</p>
             <p v-else>Out of Stock</p>
+            <select
+              name="variants"
+              id="variants"
+              @change="product.changeColor($event.target.value)"
+            >
+              <option
+                v-for="variant in product.variants"
+                :key="variant.id"
+                :value="variant.color"
+              >
+                {{ variant.color }}
+              </option>
+            </select>
+            <div>
+              <ul>
+                <li v-for="detail in product.details" :key="detail.id">
+                  {{ detail.material }}
+                </li>
+              </ul>
+            </div>
+            <div>
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: collapse;
+                  font-family: Arial, sans-serif;
+                  color: #333;
+                  border: 1px solid #ccc;
+                  margin: 20px 0;
+                "
+              >
+                <thead
+                  style="
+                    background-color: #f4f4f4;
+                    border-bottom: 2px solid #ccc;
+                  "
+                >
+                  <tr>
+                    <th style="padding: 10px; text-align: left">Size</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="size in product.sizes"
+                    :key="size.id"
+                    style="border-bottom: 1px solid #ccc"
+                  >
+                    <td style="padding: 10px">{{ size.size }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+        <!-- end for -->
       </div>
     </div>
 
@@ -31,7 +89,7 @@
 
     <!-- Mount App -->
     <script>
-      const mountedApp = app.mount('#app')
+      const mountedApp = app.mount("#app");
     </script>
   </body>
 </html>
