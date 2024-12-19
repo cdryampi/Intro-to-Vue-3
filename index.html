@@ -7,13 +7,136 @@
     <link rel="stylesheet" href="./assets/styles.css" />
     <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+    <style>
+      /* Add your styles here */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      .title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .description {
+        font-size: 1.5rem;
+        color: #666;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .container {
+        display: grid;
+        grid: repeat(2, 1fr) / repeat(2, 1fr);
+        gap: 10px;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 1.5rem;
+        max-width: 500px;
+        min-width: 300px;
+        padding: 1.5rem;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+      .c-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .c-description {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .c-price-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0.5rem 1rem;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+      }
+      .c-price-text {
+        font-size: 1.5rem;
+        color: #666;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bolder;
+      }
+      .c-images {
+        grid: repeat(2, 1fr) / repeat(2, 1fr);
+        gap: 10px;
+        grid-template-columns: auto auto;
+      }
+      .c-img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      <h1>Product goes here</h1>
+      <!-- start card -->
+      <h1 class="title">{{ title }}</h1>
+      <p class="description">{{ description }}</p>
+      <div class="container">
+        <div class="card">
+          <h2 class="c-title">{{ products['product-1'].name }}</h2>
+          <p class="c-description">{{ products['product-1'].description }}</p>
+          <div class="c-price-container">
+            <p class="c-price-text">{{ products['product-1'].price }}€</p>
+          </div>
+          <div class="c-images">
+            <img
+              :src="products['product-1'].image"
+              :alt="products['product-1'].name"
+              :srcset="products['product-1'].image"
+              class="c-img"
+            />
+          </div>
+        </div>
+        <div class="card">
+          <h2 class="c-title">{{ products['product-2'].name }}</h2>
+          <p class="c-description">{{ products['product-2'].description }}</p>
+          <div class="c-price-container">
+            <p class="c-price-text">{{ products['product-2'].price }}€</p>
+          </div>
+          <div class="c-images">
+            <img
+              :src="products['product-2'].image"
+              :alt="products['product-2'].name"
+              :srcset="products['product-2'].image"
+              class="c-img"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
     </div>
 
     <!-- Import Js -->
     <script src="./main.js"></script>
+    <!-- Mount app -->
+    <script>
+      app.mount("#app");
+    </script>
   </body>
 </html>
