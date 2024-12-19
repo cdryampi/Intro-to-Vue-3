@@ -6,21 +6,33 @@
     <!-- Import Styles -->
     <link rel="stylesheet" href="./assets/styles.css" />
     <!-- Import Vue.js -->
-    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
     <div id="app">
       <div class="nav-bar"></div>
-      
+
       <div class="product-display">
-        <div class="product-container">
+        <!-- for product -->
+        <div
+          v-for="(product, index) in products"
+          :key="index"
+          class="product-container"
+        >
           <div class="product-image">
-            <!-- image goes here -->
+            <img
+              :src="product.image"
+              :alt="product.name"
+              :srcset="product.image"
+            />
           </div>
           <div class="product-info">
-            <h1>{{ product }}</h1>
+            <h1>{{ product.name }}</h1>
+            <p>{{ product.description}}</p>
+            <p><strong>{{product.price}}</small>€</p>
           </div>
         </div>
+        <!-- end product for -->
       </div>
     </div>
 
@@ -29,7 +41,7 @@
 
     <!-- Mount App -->
     <script>
-      const mountedApp = app.mount('#app')
+      app.mount("#app");
     </script>
   </body>
 </html>
